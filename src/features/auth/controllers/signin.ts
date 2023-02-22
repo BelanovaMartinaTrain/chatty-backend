@@ -7,8 +7,9 @@ import { authService } from '@service/db/auth.service';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { loginSchema } from '@auth/schemes/signin';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
-import { IUserDocument } from '@user/interfaces/user.interface';
 import { userService } from '@service/db/user.service';
+import { IUserDocument } from '@user/interfaces/user.interface';
+
 
 export class SignIn {
   @joiValidation(loginSchema)
@@ -36,6 +37,7 @@ export class SignIn {
       },
       config.JWT_TOKEN!
     );
+
     req.session = { jwt: userJwt };
     const userDocument: IUserDocument = {
       ...user,
